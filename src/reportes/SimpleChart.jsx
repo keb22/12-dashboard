@@ -1,47 +1,31 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
 import { BarChart, CartesianGrid, Legend, ResponsiveContainer, XAxis, YAxis, Bar , Tooltip } from "recharts";
+import FormTime from "./FormTime";
 
 
-const SimpleChart =() =>{
-
+const SimpleChart =({datos}) =>{
   //Data
-  const [data, setData] = useState([]);
-
-
-  //Función para obtener los datos
-  const obtenerRegistro = async () => {
-  
-    try {
-      const response = await axios.get('http://localhost/12-Dashboard/src/back-end/Data.php');
-      const records = response.data;
-      console.log(records);
-      setData(records);
-    } catch (error) {
-      console.error(error);
-    }
-    };
-
-    obtenerRegistro();
+	const data = datos;
   return(
-    <div>
-      <h1>Simple Chart</h1>
-      <ResponsiveContainer width="100%" aspect={2}>
+    <div className="w-100 p-2 bg-light rounded-3">
+      <h3>Clientes</h3>
+      <FormTime/>
+      <ResponsiveContainer  aspect={1}>
         <BarChart data={data} 
-          width={500} 
-          height={300} 
+          width={100} 
+          height={100} 
           margin={{
            top:5,
-           right:30,
-           left:20,
+           right:10,
+           left:10,
            bottom:5,
-       }}>
+          }}>
          <CartesianGrid strokeDasharray="4 1 2" />
-         <XAxis dataKey="nombre" />
+         <XAxis dataKey="create_at" />
          <YAxis />
          <Tooltip />
          <Legend />
-         <Bar dataKey="total" fill="#6b48ff" />
+         <Bar dataKey="cantidad" fill="#FFA500" />
         </BarChart>
       </ResponsiveContainer>
 

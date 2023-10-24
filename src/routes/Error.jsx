@@ -1,4 +1,3 @@
-import NavBar from "../componentes/Navbar";
 
 const Error = () =>{
   return(

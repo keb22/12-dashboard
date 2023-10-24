@@ -1,13 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect , useRef } from 'react';
 import axios from 'axios';
-import { AiFillDelete, AiTwotoneEdit } from 'react-icons/ai';
+import { AiFillDelete, AiTwotoneEdit, AiOutlineUserAdd } from 'react-icons/ai';
 import Swal from 'sweetalert2';
-import { Table , Button ,Container, Modal , ModalBody , ModalHeader , FormGroup , ModalFooter } from 'reactstrap';
+import { Button ,Container, Modal , ModalBody , ModalHeader , FormGroup , ModalFooter } from 'reactstrap';
+import { Col, Form, Row } from 'react-bootstrap';
+import { DownloadTableExcel } from 'react-export-table-to-excel';
+import { HiOutlineDocumentDownload } from 'react-icons/hi';
+
 
 function Tabla() {
+  //Datos sugestos a filtracion
   const [registros, setRegistros] = useState([]);
-  //Datos del formulario a editar, borrar, crear o eliminar
 
+  //Referencia de la tabla 
+  const tableRef = useRef(null);
+  //Datos sin filtrar
+  const [datos , setDatos] = useState([]);
+  //Datos del formulario a editar, borrar, crear o eliminar
   const [formdata, setFormdata] = useState({
     id:'',
     nit:'',
@@ -34,6 +43,8 @@ function Tabla() {
 
 
   }
+
+ 
 
   //Datos para el manejo del estado del formulario modal.(Mostar=True o no mostrar=false) 
   const [states, setState] = useState({
@@ -94,10 +105,10 @@ function Tabla() {
 
     limpiar();
   }
-
+  
 
   //Consultas para los registros en la Base de Datos
-
+  
   //Editar Registro  
   const editar = async () => {
     try {
@@ -161,6 +172,7 @@ function Tabla() {
     const records = response.data;
     console.log(records);
     setRegistros(records);
+    setDatos(records);
   } catch (error) {
     console.error(error);
   }
@@ -218,18 +230,53 @@ function Tabla() {
   useEffect(() => {
     obtenerRegistro();
   }, []);
- 
+  
+  
+  function handleSearch( e ){
 
- 
+    const registrosFiltrados= datos.filter(item =>
+      item.nombre.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+
+    e.target.value===''?setRegistros(datos):setRegistros(registrosFiltrados);
+  }
+  
+  
 
   return (
     <>
      <Container >
-       <Button color='primary' className='my-1' onClick={modalInsertar}>Insertar nuevo Registro</Button>
-       <Table  responsive>
+       <Button color='primary' className='mb-3 fw-semibold p-2 d-flex flex-row gap-1' onClick={modalInsertar}>  <AiOutlineUserAdd className='icon'/>Insertar Registro</Button>
+       <div className=' mb-2 bg-light rounded-3 p-2'>
+       <Form inline>
+        <Row>
+          <Col xs="auto">
+            <Form.Control
+              type="text"
+              placeholder="Buscar"
+              className=" mr-sm-2"
+              onChange={handleSearch}
+            />
+          </Col>
+          <Col xs="auto">
+            <DownloadTableExcel
+            filename='Registros Museo Prehistórico'
+            sheet='reservas'
+            currentTableRef={tableRef.current}
+            >
+              <Button className='fw-semibold d-flex flex-row ' outline color='primary'>
+               <HiOutlineDocumentDownload className='m-auto ' style={{height:'20px',width:'20px'}} />
+                Descargar 
+              </Button>
+            </DownloadTableExcel>
+          </Col>
+        </Row>
+      </Form>
+       </div>
+       <table className='table table-striped' ref={tableRef} >
           <thead>
           <tr>
-            <th><input type='checkbox' /></th>
+
             <th>Id</th>
             <th>NIT</th>
             <th>Nombre</th>
@@ -238,7 +285,6 @@ function Tabla() {
             <th>Correo</th>
             <th>Reserva</th>
             <th>Total</th>
-            <th>Fecha</th>
             <th></th>
             <th></th>
           </tr>
@@ -246,23 +292,21 @@ function Tabla() {
           <tbody>
            {registros.map(registro=>(
             <tr key={registro.id}>
-              <td><input type='checkbox' /></td>
+          
               <td>{registro.id}</td>
-              <td>{registro.nit}</td>
+              <td>{registro.nit?<span className='bg-warning rounded-2 p-1 fw-semibold'>{registro.nit}</span>:<span className='bg-info rounded-2 p-1 fw-semibold text-muted'>Cliente</span>}</td>
               <td>{registro.nombre}</td>
               <td>{registro.telefono}</td>
               <td>{registro.cantidad}</td>
               <td>{registro.correo}</td>
               <td>{registro.fecha}</td>
               <td>{registro.total}</td>
-              <td>{registro.create_at}</td>
-              <td><Button color='primary' onClick={()=>modalActualizar(registro)}> <AiTwotoneEdit /></Button></td>
-              <td><Button color='danger' onClick={()=>mostrarConfirmarBorrar(registro)}> <AiFillDelete /></Button></td>
+              <td><Button color='primary' onClick={()=>modalActualizar(registro)}> <AiTwotoneEdit className='profile' /></Button></td>
+              <td><Button color='danger' onClick={()=>mostrarConfirmarBorrar(registro)}> <AiFillDelete className='profile' /></Button></td>
            </tr>
           ))}
         </tbody>
-         
-       </Table>
+       </table>
      </Container>
      <Modal isOpen={states.modalActualizar}>
           <ModalHeader>
@@ -331,6 +375,7 @@ function Tabla() {
                 name="cantidad"
                 type="text"
                 onChange={handleChangeCantidad}
+                autoComplete='off'
                 value={formdata.cantidad}
               />
             </FormGroup>
