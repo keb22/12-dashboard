@@ -58,7 +58,7 @@ function Tabla() {
   const handleChangeCantidad = e =>{
     setFormdata({
       ...formdata,
-      total:e.target.value*1000,
+      total:e.target.value*10000,
       cantidad:e.target.value,
     })
   }

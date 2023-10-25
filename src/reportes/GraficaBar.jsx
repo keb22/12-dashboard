@@ -40,7 +40,7 @@ const GraficaBar = () => {
 
   useEffect(() => {
     // Cuando el componente se monta o cambia 'tiempo' o 'fecha', realiza la solicitud de datos
-    obtenerDatosDesdeAPI(tiempo, fecha);
+    obtenerDatosDesdeAPI();
   }, []);
 
   const handleTiempoChange = (event) => {
@@ -55,7 +55,6 @@ const GraficaBar = () => {
 
 	useEffect(() => {
 		filtrarDatos();
-		console.log(dataFiltrada);
 	}, [tiempo ,fecha])
 	
 

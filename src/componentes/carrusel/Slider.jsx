@@ -30,10 +30,17 @@ const Carousel = ({datosImg, handleBorrar, handleEditar}) => {
         ]}
       >
       {imagenes.map((imagen) => (
-        <Card  key={imagen.idImagen} className="h-100 ">
-          <img src={`http://localhost/12-Dashboard/src/back-end/Fotos/img/${imagen.nomImagen}`} alt={imagen.nomImagen} className="w-100 h-100" />
-          <CardBody>
-            <CardTitle tag="h5">
+        <Card  key={imagen.idImagen} style={{height:'600px', width:'300px'}}>
+          <img src={`http://localhost/12-Dashboard/src/back-end/Fotos/img/${imagen.nomImagen}`} 
+           style={{
+            height:'80%',
+            width:'100%',
+            objectFit:'fill',
+          }
+          }
+          alt={imagen.nomImagen}  />
+          <CardBody style={{height:'20%', width:'100%'}}>
+            <CardTitle tag="h6" >
               {imagen.nomImagen}
             </CardTitle>
             <CardText>
