@@ -1,0 +1,46 @@
+/* Estilos del botón de reserva que está siendo manejado como un componente de React 
+Adicional de un keyframe que hará la animación del botón  */
+
+@keyframes animacion1 {
+    0% {
+        transform: rotate(-5deg);
+    }
+    50% {
+        transform: rotate(5deg);
+    }
+    100% {
+        transform: rotate(-5deg);
+    }
+}
+
+
+.reserva{
+    transition: all ease-out 0.2s;
+    font-family: 'Creepster', cursive;
+    font-weight: bolder;
+    text-align: center;
+    letter-spacing: 1px;
+    height:60px;
+    color: black;
+    font-size: 25px;
+    border: 0px;
+    width: 270px;
+    border-radius: 12px;
+    background-color: transparent;
+    background-image: url(../img/reserva.png);
+    background-size:contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    animation: animacion1 2s infinite;
+}
+
+.reserva:hover{
+    cursor: url(../img/huella_dino3.png), auto;
+    transition-property:width, height,font-size;
+    transition: all ease-in 0.2s;
+    height: 67px;
+    width:275px;
+    font-size:28px;
+    background-image: url(../img/reserva.png);
+    animation: animacion1 step-end;
+}

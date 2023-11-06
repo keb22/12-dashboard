@@ -1,0 +1,75 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+
+nav{
+   
+    position:absolute;
+    z-index: 100;
+    top:0;
+    background: rgb(240,127,26);
+    background: linear-gradient(16deg, rgba(240,127,26,1) 54%, rgba(255,255,255,1) 100%);
+   
+}
+
+
+
+.itemlista{
+    text-decoration: none;
+    color: black;
+    font-family:'Creepster', cursive;
+    letter-spacing: 1px;
+    font-weight: bold;
+    height:  80px;
+    width: 170px;  
+    font-size: 20px;
+    max-width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(../img/reserva.png);
+    background-position: center;
+    background-size: contain;
+
+    background-repeat: no-repeat;
+    text-align: center;
+    transition: all ease-out 0.3s ;
+}
+
+
+.itemlista:hover{
+    cursor: url(../img/huella_dino3.png), auto;
+    transition: all ease-in 0.2s;
+    transform: scale(1.1);
+    background-image: url(../img/reserva.png);
+    
+}
+
+.itemlista>a{
+    text-decoration: none;
+    color: black;
+    font-family:'Creepster', cursive;
+    letter-spacing: 1px;
+    font-weight: bold;
+
+}
+.contenedor-logo{
+    height: 50px;
+    width:20vh;
+    
+    
+
+}
+
+.contenedor-logo>img{
+  width:100%;
+  height: 70px;
+    
+}
+
+.contenedor-reserva{
+    width:40vw;
+}

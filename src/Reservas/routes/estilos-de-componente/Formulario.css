@@ -1,0 +1,272 @@
+*{
+    padding:0;
+    margin: 0;
+    box-sizing: border-box;
+    
+}
+
+input{
+    padding: 3px 5px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    color: #333;
+    transition: box-shadow 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/*Estilos que activan el formulario principal al oprimir el boton reserva 
+que nos cambia la clase del contenedor 
+
+SI tiene la clase oculto NO será VISIBLE
+SI NO TIENE la clase oculto SI será VISIBLE*/
+
+.formulario-contenedor.oculto{
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: all ease-in 0.3s;
+}
+
+.formulario-contenedor{
+    position: absolute;
+    top:10;
+    right:10;
+
+    min-width: 400px;
+    min-height: 470px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 12px;
+    
+    background-color:#f07f1a;
+    border-radius: 10px;
+    font-family:roboto;
+    font-weight: 900;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+
+
+    opacity: 1;
+    visibility: visible;
+    transition: all ease-in 0.3s;
+}
+
+/*Estilos contenedor de cabezara e hijos */
+.contenedor-head{
+    display: flex;
+    flex-direction: row;
+    min-width: 380px;
+    min-height: 30px;
+}
+
+.contenedor-volver,.contenedor-salir{
+    margin-top: -15px;
+}
+
+.contenedor-volver.oculto{
+    display: none;
+}
+
+.contenedor-salir{
+    position: absolute;
+    right:10px;
+}
+
+.icono-close,.icono-back{
+    font-size: 25px;
+    color:black;
+    cursor: url(../img/huella_dino3.png),auto;
+}
+
+.icono-close:hover{
+    transition: color ease-in 0.1s;
+    font-size: 27px;
+    color:red;
+}
+
+/*Contenedor adaptable que cambiará su contenido según las acciones del
+usuario en la plataforma en base de:
+1-Fase Rol
+2-Fase Rol-Reserva
+3-Fase Rol-Reserva-Completo  */
+
+.contenedor-dinamico{
+    min-height:380px;
+    min-width:380px;
+    padding:10px 0px;
+    border-radius: 10px;
+    display: flex ;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+/* Estilos para el contenedor de la fase 1 Definición de un rol */
+
+.contenedor-paso1{
+    overflow: hidden;
+    position: absolute;
+    z-index: 3;
+    min-height:380px;
+    min-width: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 12px;
+
+    background-color: #FAD66f;
+    border-radius: 20px;
+    padding:10px;
+    
+
+    opacity: 1;
+    visibility: visible;
+    transition: all ease-in 0.3s;
+}
+
+.contenedor-paso1.oculto{
+    z-index: -1;
+    opacity: 0;
+    visibility: hidden;
+    transition: all ease-in 0.3s;
+}
+
+.contenedor-rol{
+    height: 170px;
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    transition: transform 0.3s;
+    border-radius: 10px;
+  
+    background-image: url(../img/icono_Empresa-o-Turista.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    font-size: 20px;
+    color:#68420F;
+    font-family:Courier;
+    padding: 5px;
+    cursor: url(../img/huella_dino3.png),auto;
+}
+
+/*Animación de los contenedores de rol */
+
+@keyframes animacion {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-10px) rotate(-10deg); }
+    40% { transform: translateX(10px) rotate(10deg); }
+    60% { transform: translateX(-10px) rotate(-10deg); }
+    80% { transform: translateX(10px) rotate(10deg); }
+    100% { transform: translateX(0) rotate(0); }
+}
+
+.contenedor-rol:hover{
+    animation: animacion 0.9s ease-in-out;
+ 
+}
+
+.contenedor-rol>svg{
+    font-size: 90px;
+    cursor: url(../img/huella_dino3.png),auto;
+}
+
+/*Estilos para el contenedor de la fase 2 Formulario-Reserva */
+.contenedor-paso2{
+    position: absolute;
+    z-index: 10;
+    min-height:380px;
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+
+    background-color: #FAD66f;
+    border-radius: 20px;
+    padding:10px;
+    
+
+    opacity: 1;
+    visibility: visible;
+    transition: all ease-in 0.3s;
+    
+}
+
+.contenedor-paso2.oculto{
+    z-index: -2;
+    opacity: 0;
+    visibility: hidden;
+    transition: all ease-in 0.3s;
+}
+
+.formulario{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    padding: 2px 15px;
+}
+
+.header-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+}
+
+.input-item{
+    width:50%;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-item2{
+    width:100%;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.contenedor-enviar{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    width:100%;
+}
+
+.boton-reserva{
+    padding: 12px 24px;
+    border: none;
+    border-radius: 4px;
+    background-color: #3498db;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  
+}

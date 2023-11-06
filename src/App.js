@@ -1,57 +1,95 @@
-import React ,{ useContext} from 'react';
+import React from 'react';
 
 //Componentes de página
-import Inicio from './routes/Inicio';
-import Reportes from './routes/Reportes';
-import Administracion from './routes/Administracion';
-import Novedades from './routes/Novedades';
-import Configuracion from './routes/Configuracion';
-import Error from './routes/Error';
+import Inicio from './Dashboard/routes/Inicio.jsx';
+import Reportes from './Dashboard/routes/Reportes.jsx';
+import Administracion from './Dashboard/routes/Administracion.jsx';
+import Novedades from './Dashboard/routes/Novedades.jsx';
 
 //Herramientas para iniciar la sesión
-import LogIn from './routes/session/LogIn';
+import LogIn from './Dashboard/routes/session/LogIn';
 import { RouterProvider , createBrowserRouter} from 'react-router-dom';
-import { AuthContext } from './context/Context'; 
 
+import { RouteError } from './Dashboard/routes/session/RouteError';
+import RouteGuard from './Dashboard/routes/session/RouteGuard.jsx';
+import Inicio2 from './Reservas/routes/Inicio.js';
+import Nosotros from './Reservas/routes/Nosotros.js';
+import Experencias from './Reservas/routes/Experencias.js';
+import InicioSelect from './Dashboard/Option.jsx';
 
 
 function App(){
-  //Variable de Acceso con la información 
-  const {userData} = useContext(AuthContext);
 
+  //Hijos Ruta para el Dashboard
+  const  rutasDashboard=[
+    
+    {
+      path:'/Dashboard/',
+      element:<LogIn />,
+    },
+    {
+      path:'/Dashboard/Inicio',
+      element: <RouteGuard><Inicio /></RouteGuard>,
+    },
+    {
+      path:'/Dashboard/Reportes',
+      element:<RouteGuard><Reportes/></RouteGuard>,
+    },
+    {
+      path:'/Dashboard/Administracion',
+      element:<RouteGuard><Administracion /> </RouteGuard>,
+    },
+    {
+      path:'/Dashboard/Novedades',
+      element:<RouteGuard><Novedades /></RouteGuard>,
+    }
+  ] ;
+ 
+  //Hijos Ruta para las Reservas Museo
 
-
+  const rutasMuseo=[
+    {
+      path:'/Reservas/',
+      element:<Inicio2/>,
+    },
+    {
+      path:'/Reservas/Inicio',
+      element:<Inicio2 />
+    },
+    {
+      path:'/Reservas/Nosotros',
+      element:< Nosotros />
+    },
+    {
+      path:'/Reservas/Experencias',
+      element:< Experencias />
+    },
+  ]
+  //Rutas 
   const router = createBrowserRouter([
     {
       path:'/',
-      element:<Inicio />,
-      errorElement:<Error />
+      element:<InicioSelect />,
+      errorElement:<RouteError/>
     },
     {
-      path:'/Reportes',
-      element:< Reportes />
+      path:'/Reservas',
+      children:rutasMuseo,
+      errorElement:<RouteError/>
     },
     {
-      path:'/Administracion',
-      element:< Administracion />
-    },
-    
-    {
-      path:'/Novedades',
-      element:<Novedades />,
-    },
-   /* {
-      path:'/Configuracion',
-      element:<Configuracion />
-    },*/
-  ])
-  
+      path:'/Dashboard',
+      errorElement:<RouteError />,
+      children:rutasDashboard,
+    }
+  ]);
+
+
+
   return(
    
      <React.StrictMode>
-      {userData?
-        <RouterProvider router={router} /> : <LogIn />
-      }
+        <RouterProvider router={router} />
      </React.StrictMode>
    
   );

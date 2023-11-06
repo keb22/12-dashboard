@@ -1,0 +1,97 @@
+/*.navbar{
+    transition: transform 0.3s ease-in-out;
+}
+
+.navbar:hover{
+    transform: translateX(-100%);
+}
+*/
+a{
+    text-decoration: none;
+}
+.head{
+    box-sizing: content-box;
+    height: 100px;
+    overflow: hidden;
+}
+
+
+.con-logo{
+    background-color: #f07f1a;
+    max-height: 80%;
+    min-height:70px;
+}
+.logo{
+    max-width: 100%;
+    max-height: 100%;
+
+}
+
+.icon{
+    min-width:30px;
+    min-height:30px;
+}
+
+.profile{
+    width: 20px;
+    height: 20px;
+}
+
+.lista{
+    box-sizing: border-box;
+    overflow-x: hidden;
+    display:flex;
+    flex-direction: column;
+
+    gap:8px;
+    list-style-type: none;
+    margin: 0;
+    padding:0;
+    
+}
+
+
+
+
+
+.item{
+    transition: all ease-out;
+  
+    gap:8px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    min-width: 35px;
+    list-style: none;
+    border-radius: 5px;
+    min-height:50px ;
+    color:gray;
+    font-size: 18px;
+    padding:7px 8px 7px 8px;
+}
+
+
+.item:hover {
+    transition: all ease-in 0.3s ;
+    background-color:#f07f1a;
+    cursor: pointer;
+    
+}
+
+
+
+.item:hover span {
+    transition: all ease-in 0.3s;
+    font-weight: 300;
+    color:white;
+}
+
+.item:hover svg {
+    transition: all ease-in 0.3s;
+    font-weight: 300;
+    color:white;
+}
+
+
