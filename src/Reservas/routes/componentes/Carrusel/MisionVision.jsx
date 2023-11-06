@@ -9,7 +9,7 @@ function MisionVision (){
 
   // Obtener imágenes de la base de datos al cargar la página
   function ObtenerFotos(){
-   axios.get('http://localhost/12-Dashboard/src/back-end/Fotos/ObtenerFotos.php') // Cambiar la URL al lanzar al servidor
+   axios.get('https://museoprehistorico.com/src/back-end/Fotos/ObtenerFotos.php') // Cambiar la URL al lanzar al servidor
    .then(response => setDatos(response.data))
    .catch(error => console.error('Error fetching images:', error));
   }
@@ -22,7 +22,6 @@ function MisionVision (){
     setImagenMision(imagenesTipo3[0] || {}); 
     const imagenesTipo4 = datos.filter(imagen => imagen.tipoImagen === '4');  
     setImagenVision(imagenesTipo4[0] || {});
-    console.log(imagenMision); 
   }, [datos]);
 
   const estilos={
@@ -40,7 +39,7 @@ function MisionVision (){
       <CardHeader>
         <CardTitle className="fw-bold">Misión</CardTitle>
       </CardHeader>
-      <Card.Img variant="top" className="m-auto" style={estilos} src={`http://localhost/12-Dashboard/src/back-end/Fotos/img/${imagenMision.nomImagen}`} />
+      <Card.Img variant="top" className="m-auto" style={estilos} src={`https://museoprehistorico.com/src/back-end/Fotos/img/${imagenMision.nomImagen}`} />
       <CardBody>
 
         <CardText>{imagenMision.descripcionImagen}</CardText>
@@ -84,7 +83,7 @@ function MisionVision (){
          <CardHeader>
            <CardTitle className="fw-bold">Visión</CardTitle>
          </CardHeader>
-         <Card.Img  className="m-auto"variant="top" style={estilos}  src={`http://localhost/12-Dashboard/src/back-end/Fotos/img/${imagenVision.nomImagen}`} />
+         <Card.Img  className="m-auto"variant="top" style={estilos}  src={`https://museoprehistorico.com/src/back-end/Fotos/img/${imagenVision.nomImagen}`} />
          <CardBody>
            <CardText>{imagenVision.descripcionImagen}</CardText>
           </CardBody>

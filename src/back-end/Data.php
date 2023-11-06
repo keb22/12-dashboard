@@ -9,7 +9,7 @@ require 'vendor/autoload.php';
 //Permisos de cabezera 
 include('./Config/Conexion.php');
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: * ');
+header('Access-Control-Allow-Origin: https://museoprehistorico.com ');
 // Cambiar esto según la URL de React
 header('Access-Control-Allow-Methods: GET, POST , PUT , DELETE'); // Cambiar esto según los métodos a permitir
 header('Access-Control-Allow-Headers: Origin, Content-Type, X-Requested-With, Accept');
@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         
                             <p>Esperamos verte pronto.</p>
                         
-                            <img src="cid:logo" width="100" height="200" alt="Imagen de la reserva">
+                            <img src="cid:logo" width="200" height="100" alt="Imagen de la reserva">
                             ';
                         
                             // Agregar imagen

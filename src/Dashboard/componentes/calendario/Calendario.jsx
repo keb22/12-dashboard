@@ -26,7 +26,7 @@ function Calendario (datos){
   const obtenerRegistro = async () => {
   
     try {
-      const response = await axios.get('http://localhost/12-Dashboard/src/back-end/Data.php');
+      const response = await axios.get('https://museoprehistorico.com/src/back-end/Data.php');
       const records = response.data;
       setData(records.map(objeto=>({
         id:objeto.id,

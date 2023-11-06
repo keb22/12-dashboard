@@ -11,7 +11,7 @@ const GraficaPie = () => {
   
   const obtenerDatosDesdeAPI = ( ) => {
     // Realiza una solicitud a tu archivo PHP con Axios
-    const apiUrl = 'http://localhost/12-Dashboard/src/back-end/Reportes/Ingresos.php'; // Reemplaza con la URL correcta
+    const apiUrl = 'https://museoprehistorico.com/src/back-end/Reportes/Ingresos.php'; // Reemplaza con la URL correcta
     
     // En la solicitud, puedes pasar los parámetros necesarios, por ejemplo, 'tiempo' y 'fecha'
     axios.get(apiUrl)

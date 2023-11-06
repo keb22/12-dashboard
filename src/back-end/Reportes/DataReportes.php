@@ -2,7 +2,7 @@
 //Permisos de cabezera 
 include('../Config/Conexion.php');
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: http://localhost:3000'); // Cambiar esto según la URL de React
+header('Access-Control-Allow-Origin: https://museoprehistorico.com'); // Cambiar esto según la URL de React
 header('Access-Control-Allow-Methods: GET'); // Cambiar esto según los métodos a permitir
 header('Access-Control-Allow-Headers: Origin, Content-Type, X-Requested-With, Accept');
 header('Access-Control-Allow-Credentials: true');

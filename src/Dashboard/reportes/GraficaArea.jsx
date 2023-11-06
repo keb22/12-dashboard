@@ -2,15 +2,19 @@ import React, { useState, useEffect } from 'react';
 import {  Row , Col, Form } from 'react-bootstrap';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import axios from 'axios';
+import TableExcel from './TableExcel';
+import { useRef } from 'react';
 
 const GraficaArea= () => {
+   //Referencia de la tabla Excel 
+  const tableRef = useRef(null);
   const [tiempo, setTiempo] = useState('ano');
   const [fecha, setFecha] = useState();
   const [data, setData] = useState([]);
 	const [dataFiltrada , setDataFiltrada] = useState([]);
 	// Función para filtrar los datos por año o fecha
   const filtrarDatos = () => {
-    if (tiempo === 'ano') {
+    if (tiempo === '2') {
       // Filtrar por año
       const añoSeleccionado = parseInt(fecha);
       const datosFiltrados = data.filter((dato) => {
@@ -18,11 +22,11 @@ const GraficaArea= () => {
         return fechaDato.getFullYear() === añoSeleccionado;
       });
       setDataFiltrada(datosFiltrados);
-    } else if (tiempo === 'fecha') {
+    } else if (tiempo === '4') {
       // Filtrar por fecha específica 
       const datosFiltrados = data.filter((dato) => dato.fecha === fecha);
       setDataFiltrada(datosFiltrados);
-    } else if(tiempo === 'mes') {
+    } else if(tiempo === '3') {
       //Filtrar por el mes
 			const mesSeleccionado= parseInt(fecha);
 			const datosFiltrados= data.filter((dato)=>{
@@ -30,7 +34,7 @@ const GraficaArea= () => {
 				return fechaDato.getMonth() === mesSeleccionado;
 			})
 			setDataFiltrada(datosFiltrados);
-    }else if(tiempo === 'general') {
+    }else if(tiempo === '1') {
 			//Dar datos generales
 			setDataFiltrada(data);
 		}else{
@@ -61,7 +65,7 @@ const GraficaArea= () => {
 
   const obtenerDatosDesdeAPI = (tiempo, fecha) => {
     // Realiza una solicitud a tu archivo PHP con Axios
-    const apiUrl = 'http://localhost/12-Dashboard/src/back-end/Reportes/DataReportes.php'; // Reemplaza con la URL correcta
+    const apiUrl = 'https://museoprehistorico.com/src/back-end/Reportes/DataReportes.php'; // Reemplaza con la URL correcta
 
     // En la solicitud, puedes pasar los parámetros necesarios, por ejemplo, 'tiempo' y 'fecha'
     axios.get(apiUrl, { params: { tiempo, fecha } })
@@ -75,7 +79,7 @@ const GraficaArea= () => {
   };
 
   return (
-		<div className="w-100 p-2 bg-light rounded-3">
+		<div className="w-100 p-3 bg-light rounded-3">
 		<Row>
 			<Col>
 				<h3 className='fs-3 fw-bold'>Personas</h3>
@@ -83,27 +87,27 @@ const GraficaArea= () => {
 		</Row>
 		<Form className='w-100'>
 		<Row className='w-100  mb-3'>
-			  <Col md={6}>
+			  <Col className='py-2' md="auto">
 					<Form.Group controlId="tiempo">
 						<Form.Label>Tipo de Lapso:</Form.Label>
 						<Form.Control as="select" value={tiempo} onChange={handleTiempoChange}>
-						<option value="general">General</option>
-							<option value="ano">Anual</option>
-							<option value="mes">Mensual</option>
-							<option value="fecha">Fecha Especifica</option>
+						<option value="1">General</option>
+							<option value="2">Anual</option>
+							<option value="3">Mensual</option>
+							<option value="4">Fecha Especifica</option>
 						</Form.Control>
 					</Form.Group>
 				</Col>	
-					{tiempo === 'ano' && (
-			  <Col md={6}>
+					{tiempo === '2' && (
+			  <Col className='py-2' md="auto">
 						<Form.Group controlId="year">
 							<Form.Label>Año:</Form.Label>
 							<Form.Control type="number" value={fecha} onChange={handleFechaChange} />
 						</Form.Group>
 		  	</Col>
 					)}
-					{tiempo === 'mes' && (
-				<Col md={6}>
+					{tiempo === '3' && (
+				<Col className='py-2' md="auto">
 						<Form.Group controlId="mes">
 							<Form.Label>Mes:</Form.Label>
 							<Form.Control as="select" value={fecha} onChange={handleFechaChange}>
@@ -123,14 +127,15 @@ const GraficaArea= () => {
 						</Form.Group>
 				</Col>
 					)}
-					{tiempo === 'fecha' && (
-				<Col md={6}>
+					{tiempo === '4' && (
+				<Col className='py-2' md="auto">
 						<Form.Group controlId="fecha">
 							<Form.Label>Fecha Específica:</Form.Label>
 							<Form.Control type="date" value={fecha} onChange={handleFechaChange} />
 						</Form.Group>
 				</Col>
 					)}
+				<TableExcel name="Reservas" tableRef={tableRef} data={dataFiltrada}/>
 		</Row>	
 			</Form>
 		<Row className='w-100'>

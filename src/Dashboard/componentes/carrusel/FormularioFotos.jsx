@@ -32,7 +32,7 @@ function Formulario ({obtenerFoto}){
     formData.append('tipoImagen', option )
     formData.append('descripcionImagen', descripcion);
     
-    axios.post('http://localhost/12-Dashboard/src/back-end/Fotos/AgregarFotos.php', formData) // Cambiar la URL según el dominio
+    axios.post('https://museoprehistorico.com/src/back-end/Fotos/AgregarFotos.php', formData) // Cambiar la URL según el dominio
     .then(response => {console.log(response.data.message);
       obtenerFoto();
     })

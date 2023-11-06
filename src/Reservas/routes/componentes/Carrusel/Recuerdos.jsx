@@ -10,7 +10,7 @@ function Recuerdos (){
 
   // Obtener imágenes de la base de datos al cargar la página
   function ObtenerFotos(){
-   axios.get('http://localhost/12-Dashboard/src/back-end/Fotos/ObtenerFotos.php') // Cambiar la URL al lanzar al servidor
+   axios.get('https://museoprehistorico.com/src/back-end/Fotos/ObtenerFotos.php') // Cambiar la URL al lanzar al servidor
    .then(response => setDatos(response.data))
    .catch(error => console.error('Error fetching images:', error));
   }
@@ -29,7 +29,7 @@ function Recuerdos (){
         <Carousel.Item interval={2000} key={i}>
           <Card color="secondary" className="p-2 bg-light rounded-3" style={{height:'70vh'}}>
           <img 
-          src={`http://localhost/12-Dashboard/src/back-end/Fotos/img/${imagen.nomImagen}`} 
+          src={`https://museoprehistorico.com/src/back-end/Fotos/img/${imagen.nomImagen}`} 
           alt={imagen.descripcionImagen}
           className="w-100 h-100"
           style={{

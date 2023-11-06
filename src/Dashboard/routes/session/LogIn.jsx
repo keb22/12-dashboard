@@ -60,7 +60,7 @@ function LogIn (){
     e.preventDefault();
 
     //Manejo del formulario y validación de usuario
-    const url='http://localhost/12-Dashboard/src/back-end/ValidarUsuario.php';//Cambiar direccion de la url 
+    const url='https://museoprehistorico.com/src/back-end/ValidarUsuario.php';//Cambiar direccion de la url 
     try {
       const response = await axios.post(url,preSession); 
       const respuesta = response.data;

@@ -10,13 +10,31 @@ import Paginacion from './Paginacion';
 
 
 function Tabla() {
-  //Datos sugestos a filtracion
+  //Datos sin filtrar
+  const [datos , setDatos] = useState([]);
+  //Datos sujetos a filtracion
   const [registros, setRegistros] = useState([]);
+  //Datos a mostrar por página
+  const [registrosPorPagina, setRegistrosPorPagina]= useState(7);
+
+  const [PaginaActual , setPaginaActual]= useState(1);
+  const [registrosPag , setRegistrosPag] = useState([]);
+  const [totalPaginas , setTotalPaginas] = useState();
+
+  const paginarData = ( data, page, pageSize) => {
+    const startIndex = (page - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    return data.slice(startIndex, endIndex);
+  };
+
+  const onCambioPagina = ( numeroPagina ) => {
+    setPaginaActual(numeroPagina+1);
+    setRegistrosPag(paginarData(registros, numeroPagina, registrosPorPagina));
+  };
+
 
   //Referencia de la tabla 
   const tableRef = useRef(null);
-  //Datos sin filtrar
-  const [datos , setDatos] = useState([]);
   //Datos del formulario a editar, borrar, crear o eliminar
   const [formdata, setFormdata] = useState({
     id:'',
@@ -45,14 +63,9 @@ function Tabla() {
 
   }
 
-  //Paginación de la Tabla
-  const [PaginaActual, setPaginaActual] = useState(1);
-  const [totalPaginas, setTotalPaginas] = useState();
+
   
 
-  const onCambioPagina= ({numeroPagina}) =>{
-    setPaginaActual(numeroPagina);
-  }
   //Fecha Actual
   const fechashoy= new Date();
   const fechaAct= fechashoy.toLocaleDateString().toString();
@@ -126,7 +139,7 @@ function Tabla() {
   const editar = async () => {
     try {
       const response = await axios.put(
-        "http://localhost/12-Dashboard/src/back-end/Data.php",
+        "https://museoprehistorico.com/src/back-end/Data.php",
         formdata
       );
       console.log(response.data);
@@ -145,7 +158,7 @@ function Tabla() {
   const borrar = async (registro) =>{
     try {
       const response = await axios.delete(
-      `http://localhost/12-Dashboard/src/back-end/Data.php?id=${registro.id}`
+      `https://museoprehistorico.com/src/back-end/Data.php?id=${registro.id}`
       );
       console.log(response.data);
       await obtenerRegistro();
@@ -162,7 +175,7 @@ function Tabla() {
     
     try {
       const response = await axios.post(
-        'http://localhost/12-Dashboard/src/back-end/Data.php',
+        'https://museoprehistorico.com/src/back-end/Data.php',
         formdata
       );
       const data = response.data;
@@ -192,11 +205,14 @@ function Tabla() {
   const obtenerRegistro = async () => {
   
   try {
-    const response = await axios.get('http://localhost/12-Dashboard/src/back-end/Data.php');
+    const response = await axios.get('https://museoprehistorico.com/src/back-end/Data.php');
     const records = response.data;
     console.log(records);
-    setRegistros(records);
     setDatos(records);
+    setRegistros(records);
+    
+    
+
   } catch (error) {
     console.error(error);
   }
@@ -251,11 +267,17 @@ function Tabla() {
   }
 
   // Llamado inicial a la BD para generar el datatable
+  
   useEffect(() => {
     obtenerRegistro();
-    setTotalPaginas(Math.ceil(registros.length / 10));
-    console.log(totalPaginas);
   }, []);
+
+    
+  useEffect(() => {
+    setTotalPaginas(Math.ceil(registros.length / registrosPorPagina));
+    setRegistrosPag(paginarData(registros, PaginaActual, registrosPorPagina));
+  }, [registros , registrosPorPagina, PaginaActual]);
+
   
   
   function handleSearch( e ){
@@ -317,7 +339,7 @@ function Tabla() {
           </tr>
           </thead>
           <tbody>
-           {registros.map(registro=>(
+           {registrosPag.map(registro=>(
             <tr key={registro.id}>
           
               <td>{registro.id}</td>
@@ -334,10 +356,12 @@ function Tabla() {
           ))}
         </tbody>
        </table>
-        <Paginacion 
-        totalPaginas={totalPaginas}
-        PaginaActual={PaginaActual}
-        onCambioPagina={onCambioPagina} />
+       <Paginacion
+       totalPaginas={totalPaginas}
+       PaginaActual={PaginaActual} 
+       onCambioPagina={onCambioPagina}
+       />
+     
      </Container>
      <Modal isOpen={states.modalActualizar}>
           <ModalHeader>

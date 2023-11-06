@@ -11,7 +11,7 @@ const Inicio = () =>{
   //Función para obtener los datos
   const obtenerRegistro = async () => { 
     try {
-      const response = await axios.get('http://localhost/12-Dashboard/src/back-end/Data.php');
+      const response = await axios.get('https://museoprehistorico.com/src/back-end/Data.php');
       const records = response.data;
       console.log(records);
       setData(records);
@@ -29,14 +29,14 @@ const Inicio = () =>{
   
   // Obtener imágenes de la base de datos al cargar la página
   function ObtenerFotos(){
-    axios.get('http://localhost/12-Dashboard/src/back-end/Fotos/ObtenerFotos.php') // Cambiar la URL al lanzar al servidor
+    axios.get('https://museoprehistorico.com/src/back-end/Fotos/ObtenerFotos.php') // Cambiar la URL al lanzar al servidor
     .then(response => setImagenes(response.data))
     .catch(error => console.error('Error fetching images:', error));
   }
 
   //Editar Foto
   const handleEditar = (imagen) => {
-    const url= `http://localhost/12-Dashboard/src/back-end/Fotos/EliminarFoto.php?id=${imagen.idImagen}`;//URL del archivo que elimina las fotos
+    const url= `https://museoprehistorico.com/src/back-end/Fotos/EliminarFoto.php?id=${imagen.idImagen}`;//URL del archivo que elimina las fotos
     axios.post(url)
     .then(response => {console.log(response.data.message);
       ObtenerFotos();
@@ -48,7 +48,7 @@ const Inicio = () =>{
   const handleBorrar = async (imagen) =>{
     try {
       const response = await axios.delete(
-      `http://localhost/12-Dashboard/src/back-end/Fotos/EliminarFoto.php?id=${imagen.idImagen}`
+      `https://museoprehistorico.com/src/back-end/Fotos/EliminarFoto.php?id=${imagen.idImagen}`
       );
       console.log(response.data);
       await ObtenerFotos();

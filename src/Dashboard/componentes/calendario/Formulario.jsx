@@ -21,7 +21,7 @@ const FormularioCal = ({active, setActive , datos , obtenerRegistro}) => {
   const editar = async () => {
     try {
       const response = await axios.put(
-        "http://localhost/12-Dashboard/src/back-end/Data.php",
+        "https://museoprehistorico.com/src/back-end/Data.php",
         data
       );
       console.log(response.data);

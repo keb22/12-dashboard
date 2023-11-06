@@ -20,7 +20,7 @@ const Anuncios = ({ datosImg , handleBorrar , handleEditar }) => {
     >
       {imagenesTipo2.map((imagen, i) => (
         <Card className="w-100 " key={i}>        
-          <img src={`http://localhost/12-Dashboard/src/back-end/Fotos/img/${imagen.nomImagen}`} 
+          <img src={`https://museoprehistorico.com/src/back-end/Fotos/img/${imagen.nomImagen}`} 
           alt={imagen.descripcion} 
           style={{height: '200px', width:'100%'}} />
           <CardBody >

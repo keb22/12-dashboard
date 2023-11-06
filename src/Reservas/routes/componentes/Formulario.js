@@ -65,7 +65,7 @@ const Formulario = ( props ) => {
     handleSalir();
     try {
       const response = await axios.post(
-        'http://localhost/12-Dashboard/src/back-end/Data.php',
+        'https://museoprehistorico.com/src/back-end/Data.php',
         formdatos
       );
       const data =  await response.data;

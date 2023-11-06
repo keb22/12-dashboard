@@ -31,7 +31,7 @@ const Carousel = ({datosImg, handleBorrar, handleEditar}) => {
       >
       {imagenes.map((imagen) => (
         <Card  key={imagen.idImagen} style={{height:'600px', width:'300px'}}>
-          <img src={`http://localhost/12-Dashboard/src/back-end/Fotos/img/${imagen.nomImagen}`} 
+          <img src={`https://museoprehistorico.com/src/back-end/Fotos/img/${imagen.nomImagen}`} 
            style={{
             height:'80%',
             width:'100%',

@@ -10,7 +10,7 @@ function Anuncios (){
 
   // Obtener imágenes de la base de datos al cargar la página
   function ObtenerFotos(){
-   axios.get('http://localhost/12-Dashboard/src/back-end/Fotos/ObtenerFotos.php') // Cambiar la URL al lanzar al servidor
+   axios.get('https://museoprehistorico.com/src/back-end/Fotos/ObtenerFotos.php') // Cambiar la URL al lanzar al servidor
    .then(response => setDatos(response.data))
    .catch(error => console.error('Error fetching images:', error));
   }
@@ -28,7 +28,7 @@ function Anuncios (){
       {imagenes.map((imagen,i)=>(
         <Carousel.Item className="" interval={2000} key={i}>
           <img 
-          src={`http://localhost/12-Dashboard/src/back-end/Fotos/img/${imagen.nomImagen}`} 
+          src={`https://museoprehistorico.com/src/back-end/Fotos/img/${imagen.nomImagen}`} 
           alt={imagen.descripcionImagen}
           style={{
             height:'25vh',

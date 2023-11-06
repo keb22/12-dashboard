@@ -30,7 +30,7 @@ const Nosotros = ({datosImg , handleBorrar}) => {
           <Card outline>
             <CardBody>
               <img 
-              src={`http://localhost/12-Dashboard/src/back-end/Fotos/img/${imagenMision?.nomImagen}`} 
+              src={`https://museoprehistorico.com/src/back-end/Fotos/img/${imagenMision?.nomImagen}`} 
               alt="mision"
               style={estilos} />
               <h5 className="mt-2">Mision</h5>
@@ -51,7 +51,7 @@ const Nosotros = ({datosImg , handleBorrar}) => {
           <Card outline>
            <CardBody>
             <img 
-            src={`http://localhost/12-Dashboard/src/back-end/Fotos/img/${imagenVision?.nomImagen}`} 
+            src={`https://museoprehistorico.com/src/back-end/Fotos/img/${imagenVision?.nomImagen}`} 
             alt="vision"
             style={estilos} />
               <h5 className="mt-2">Vision</h5>
