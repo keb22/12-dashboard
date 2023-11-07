@@ -15,7 +15,7 @@ function Tabla() {
   //Datos sujetos a filtracion
   const [registros, setRegistros] = useState([]);
   //Datos a mostrar por página
-  const [registrosPorPagina, setRegistrosPorPagina]= useState(7);
+  const registrosPorPagina=7;
 
   const [PaginaActual , setPaginaActual]= useState(1);
   const [registrosPag , setRegistrosPag] = useState([]);

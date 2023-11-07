@@ -14,7 +14,7 @@ const Paginacion = ({ totalPaginas, PaginaActual, onCambioPagina }) => {
             <button
               className="btn btn-light mx-1"
               onClick={(e)=>prevenir(e, numeroPagina+1)}
-              disabled={PaginaActual == numeroPagina+2}
+              disabled={PaginaActual === numeroPagina+2}
             >
                {numeroPagina + 1}
             </button>

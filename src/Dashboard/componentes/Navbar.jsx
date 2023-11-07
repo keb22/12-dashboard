@@ -3,7 +3,6 @@ import { useEffect, useState , useContext} from 'react';
 import {Link, useNavigate } from 'react-router-dom';
 
 //Iconos 
-import {FiSettings} from 'react-icons/fi';
 import {BsClipboard2DataFill} from 'react-icons/bs';
 import { BiLogOut } from 'react-icons/bi';
 import {FaUserAlt, FaUserEdit} from 'react-icons/fa';

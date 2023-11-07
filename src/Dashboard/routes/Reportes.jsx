@@ -8,12 +8,11 @@ import { Row, Col } from "react-bootstrap";
 import GraficaBar from "../reportes/GraficaBar";
 
 //Herremientas para obtener los datos de la sesión
-import { AuthContext } from '../context/Context';
-import { useContext } from "react";
+
 import '../../css/index2.css';
 import GraficaArea from "../reportes/GraficaArea";
 const Reportes = () =>{
-  const {userData} = useContext(AuthContext);
+ 
 
     //Data
     const [data, setData] = useState([]);

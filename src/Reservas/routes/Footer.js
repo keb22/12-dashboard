@@ -2,7 +2,7 @@ import './routescss/Footer.css';
 import {CgMail} from 'react-icons/cg';
 import {AiFillPhone} from 'react-icons/ai';
 import {TiLocation} from 'react-icons/ti';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import '../../css/index1.css';
 export default function Footer () {
 

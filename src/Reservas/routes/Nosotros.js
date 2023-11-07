@@ -4,7 +4,7 @@ import Anuncios from './componentes/Carrusel/Anuncios';
 import Barra from './Navbar';
 import MisionVision from './componentes/Carrusel/MisionVision';
 import '../../css/index1.css';
-import { Card, CardBody, CardFooter, Col, Row } from 'reactstrap';
+import { Card, CardBody, Col, Row } from 'reactstrap';
 import Redes from './componentes/Redes';
 
 

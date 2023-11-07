@@ -13,56 +13,55 @@ const GraficaArea= () => {
   const [data, setData] = useState([]);
 	const [dataFiltrada , setDataFiltrada] = useState([]);
 	// Función para filtrar los datos por año o fecha
-  const filtrarDatos = () => {
-    if (tiempo === '2') {
-      // Filtrar por año
-      const añoSeleccionado = parseInt(fecha);
-      const datosFiltrados = data.filter((dato) => {
-        const fechaDato = new Date(dato.fecha);
-        return fechaDato.getFullYear() === añoSeleccionado;
-      });
-      setDataFiltrada(datosFiltrados);
-    } else if (tiempo === '4') {
-      // Filtrar por fecha específica 
-      const datosFiltrados = data.filter((dato) => dato.fecha === fecha);
-      setDataFiltrada(datosFiltrados);
-    } else if(tiempo === '3') {
-      //Filtrar por el mes
-			const mesSeleccionado= parseInt(fecha);
-			const datosFiltrados= data.filter((dato)=>{
-				const fechaDato= new Date(dato.fecha);
-				return fechaDato.getMonth() === mesSeleccionado;
-			})
-			setDataFiltrada(datosFiltrados);
-    }else if(tiempo === '1') {
-			//Dar datos generales
-			setDataFiltrada(data);
-		}else{
-			setDataFiltrada(data);
-		}
-  };
-
-  useEffect(() => {
-    // Cuando el componente se monta o cambia 'tiempo' o 'fecha', realiza la solicitud de datos
-    obtenerDatosDesdeAPI(tiempo, fecha);
-  }, []);
-
-  const handleTiempoChange = (event) => {
-    setTiempo(event.target.value);
-		console.log(dataFiltrada)
-
-  };
-
-  const handleFechaChange = (event) => {
-    setFecha(event.target.value);
-	};
-
-	useEffect(() => {
-		filtrarDatos();
-		console.log(dataFiltrada);
-	}, [tiempo ,fecha])
 	
-
+	useEffect(() => {
+		// Cuando el componente se monta o cambia 'tiempo' o 'fecha', realiza la solicitud de datos
+		obtenerDatosDesdeAPI(tiempo, fecha);
+	}, [tiempo, fecha]);
+	
+	const handleTiempoChange = (event) => {
+		setTiempo(event.target.value);
+		console.log(dataFiltrada)
+		
+	};
+	
+	const handleFechaChange = (event) => {
+		setFecha(event.target.value);
+	};
+	
+	useEffect(() => {
+		const filtrarDatos = ({tiempo ,fecha}) => {
+		  if (tiempo === '2') {
+			// Filtrar por año
+			const añoSeleccionado = parseInt(fecha);
+			const datosFiltrados = data.filter((dato) => {
+			  const fechaDato = new Date(dato.fecha);
+			  return fechaDato.getFullYear() === añoSeleccionado;
+			});
+			setDataFiltrada(datosFiltrados);
+		  } else if (tiempo === '4') {
+			// Filtrar por fecha específica 
+			const datosFiltrados = data.filter((dato) => dato.fecha === fecha);
+			setDataFiltrada(datosFiltrados);
+		  } else if(tiempo === '3') {
+			//Filtrar por el mes
+				  const mesSeleccionado= parseInt(fecha);
+				  const datosFiltrados= data.filter((dato)=>{
+					  const fechaDato= new Date(dato.fecha);
+					  return fechaDato.getMonth() === mesSeleccionado;
+				  })
+				  setDataFiltrada(datosFiltrados);
+		  }else if(tiempo === '1') {
+				  //Dar datos generales
+				  setDataFiltrada(data);
+			  }else{
+				  setDataFiltrada(data);
+			  }
+		};
+		filtrarDatos(tiempo,fecha);
+	}, [tiempo ,fecha , data])
+	
+	
   const obtenerDatosDesdeAPI = (tiempo, fecha) => {
     // Realiza una solicitud a tu archivo PHP con Axios
     const apiUrl = 'https://museoprehistorico.com/src/back-end/Reportes/DataReportes.php'; // Reemplaza con la URL correcta
